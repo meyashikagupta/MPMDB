@@ -23,7 +23,7 @@ from basic.views import basic_view
 from proteom.views import proteom_view
 from classification.views import classification_view
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from pages.views import home_view ,intro_view, aloevera_view , amla_view , ashwagandha_view , babool_view , bhringraj_view , cinnamon_view , clove_view , cumin_view , curry_view , eucalyptus_view , ginger_view , lavender_view , mehndi_view , neem_view , peppermint_view , tulsi_view , turmeric_view 
+from pages.views import home_view ,intro_view, aloevera_view , amla_view , ashwagandha_view , babool_view , bhringraj_view , cinnamon_view , clove_view , cumin_view , curry_view , eucalyptus_view , ginger_view , lavender_view , mehndi_view , neem_view , peppermint_view , tulsi_view , turmeric_view, plantbot_view, plantbot_api 
 
 
 urlpatterns = [
@@ -53,6 +53,8 @@ urlpatterns = [
     path('peppermint.html', peppermint_view, name="peppermint"),
     path('tulsi.html', tulsi_view, name="tulsi"),
     path('turmeric.html', turmeric_view, name="turmeric"),
+    path('plantbot.html', plantbot_view, name="plantbot"),
+    path('api/plantbot/', plantbot_api, name="plantbot_api"),
     path('home/', home_view , name='home'),
     path('intro/',intro_view ,name='intro'),
     path('basic/',basic_view.as_view() ,name='basic'),

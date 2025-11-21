@@ -1,0 +1,71 @@
+{% load static %}
+<section class="section compact">
+  <div class="plant-carousel-shell" data-plant-carousel>
+    <div class="carousel-header">
+      <div class="carousel-copy">
+        <h2>{{ heading|default:"Flagship library" }}</h2>
+        <p>
+          {{ subheading|default:"Start with frequently cited medicinal plants. Deep links open the respective knowledge sheets." }}
+        </p>
+      </div>
+      <div class="carousel-nav">
+        <button type="button" aria-label="Previous plants" data-carousel-nav="prev">←</button>
+        <button type="button" aria-label="Next plants" data-carousel-nav="next">→</button>
+      </div>
+    </div>
+    <div class="plant-carousel" data-carousel-track>
+      <article class="plant-card">
+        <figure style="background-image: url('{% static 'images/aloe.avif' %}')"></figure>
+        <div class="content">
+          <h4>Aloe vera</h4>
+          <p><em>Aloe barbadensis Mill.</em></p>
+          <a href="aloevera.html">Open dossier</a>
+        </div>
+      </article>
+      <article class="plant-card">
+        <figure style="background-image: url('{% static 'images/theme.png' %}')"></figure>
+        <div class="content">
+          <h4>Ashwagandha</h4>
+          <p><em>Withania somnifera</em></p>
+          <a href="ashwagandha.html">Open dossier</a>
+        </div>
+      </article>
+      <article class="plant-card">
+        <figure style="background-image: url('{% static 'images/neem2.png' %}')"></figure>
+        <div class="content">
+          <h4>Neem</h4>
+          <p><em>Azadirachta indica</em></p>
+          <a href="neem.html">Open dossier</a>
+        </div>
+      </article>
+      <article class="plant-card">
+        <figure style="background-image: url('{% static 'images/pm2.avif' %}')"></figure>
+        <div class="content">
+          <h4>Turmeric</h4>
+          <p><em>Curcuma longa</em></p>
+          <a href="turmeric.html">Open dossier</a>
+        </div>
+      </article>
+      <article class="plant-card">
+        <figure style="background-image: url('{% static 'images/pm2.avif' %}')"></figure>
+        <div class="content">
+          <h4>Peppermint</h4>
+          <p><em>Mentha piperita</em></p>
+          <a href="peppermint.html">Open dossier</a>
+        </div>
+      </article>
+      <article class="plant-card">
+        <figure style="background-image: url('{% static 'images/tulsi.jpeg' %}')"></figure>
+        <div class="content">
+          <h4>Tulsi</h4>
+          <p><em>Ocimum tenuiflorum</em></p>
+          <a href="tulsi.html">Open dossier</a>
+        </div>
+      </article>
+    </div>
+    <div class="carousel-progress" aria-hidden="true">
+      <span data-carousel-progress></span>
+    </div>
+  </div>
+</section>
+

@@ -1,747 +1,312 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% load static %}
-    <link
-      rel="icon"
-      href="https://upload.wikimedia.org/wikipedia/en/5/56/Logo-jiit.png"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+{% load static %}
 
- <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% block extra_head %}
 
-    <title> Medicinal Plant Metabolite Database </title>
-    <!-- Fontawesome Link for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-  </head>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+    <link href="https://upload.wikimedia.org/wikipedia/en/5/56/Logo-jiit.png" rel="icon"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- Bootstrap CSS -->
+<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" rel="stylesheet"/>
+<title> Medicinal Plant Metabolite Database </title>
+<!-- Fontawesome Link for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet"/>
+{% endblock %}
 
-    * {
-      margin: 0px;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      background: url('{{ STATIC_URL }}/static/images/leaf.avif'); 
-      display: flex;
-      flex-direction: column;
-      scroll-behavior: smooth;
-    overflow-x: hidden;
-      justify-content: center;
-      align-items: center;
-      background-size: cover; 
-      background-attachment: fixed;
-
-  }
-  
-  ::-webkit-scrollbar {
-    color: #000000;
-    display: none;
-}
-
-  
-/* Header Part */   
-
-
-.hero {
-  display: flex;
-  background:  url('{{ STATIC_URL }}/static/images/hi.avif');
-  opacity: 100%;
-  background-repeat: no-repeat;
-  align-items: center;
-  justify-content: center;
-  width:100%;
-  overflow-x: hidden; 
-  top: 0;
-  left: 0;
-  z-index: auto;
-  background-size: cover;   
-}
-
-.hero-cta {
-  display: flex;
-  flex-direction: column;
-  max-width: 1500vw;
-  width: 100%;
-  justify-content: center;
-  overflow: hidden;
-  align-items: center;
-  height:auto;
-  padding: 25px 75px 0px 75px;
-  margin: 0.5vh 1.5vw 0vh 1.5vw;
-}
-
-.hero-cta p {
-  font-family: 'Roboto', arial;
-  opacity: 0.7;
-  color:#135807; 
-  margin: 1rem 0px 1rem 0px;
-}
-
-@media screen and (min-width: 836vw){
-  .hero-cta {
-    height: 280vh;
-  }
-}
-
-h1 {
-    font-size: 45px;
-    font-weight: bold;
-    color: #ffffff;
-    font-family: 'roboto',arial ;
-    text-align:center;
-
-}
-    
-    h2 {
-        font-size: 30px;
-        color: #ffffff;
-        font-family: 'roboto',arial ;
-        text-align:center;
-    }
-    
-    h3 {
-        font-size: 50px;
-        color: #012d0e;
-        font-family: 'roboto',arial ;
-        text-align:center;
-    }
-    
-    .icon {
-      padding: 1rem  1rem;
-      margin-left: 1 rem;
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      aspect-ratio: 1 / 1;
-    }
-
-    .icon2 {
-      padding: 1rem 1rem;
-      margin-left: 1 rem;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      aspect-ratio: 1 / 1;
-    
-    }
-
-    /* Navbar Part */
-    main {
-      top: 0;
-      left: 0;
-      z-index: 5;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      background:  linear-gradient(114.3deg, rgb(19, 126, 57) 0.2%, rgb(8, 65, 91) 68.5%);
-    }
-    
-    .navbar {
-      display: flex;
-      padding: 0 5px;
-      max-width: 1200px;
-      width: 100%;
-      align-items: center;
-      justify-content: space-evenly;
-      overflow: hidden;
-      height:100%;
-    }
-
-    .navbar a{
-      text-decoration: none;
-      color: rgb(255, 255, 255);
-      padding: 10px 19px;
-      font-family: sans-serif;
-      font-size:18px;
-      }
-
-    .navbar a:hover{
-        color:mediumseagreen;
-      }
-    
-    .navbar input#menu-toggler {
-      display: none;
-    }
-    
-    .navbar #hamburger-btn {
-      cursor: pointer;
-      display: none;
-    }
-    
-    .navbar .all-links {
-      display: flex;
-      align-items: center;
-    }
-    
-    .navbar .all-links li {
-      position: relative;
-      list-style: none;
-    }
-    
-    header a, footer a {
-      margin-left: 40px;
-      text-decoration: none;
-      color: #fff;
-      height: 100%;
-      padding: 20px 0;
-      display: inline-block;
-    }
-    
-    header a:hover, footer a:hover {
-      color: #ddd;
-    }
-    
-
-    .homepage .content {
-      display: flex;
-      height: auto;
-      z-index: 3;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      
-    }
-    
-    .homepage .content h1 {
-      font-size: 60px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    
-    .homepage .content .text {
-      margin-bottom: auto;
-      color: #fff;
-      font-size: 20px;
-      text-align: center;
-      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    .content a {
-      color: #000;
-      display: block;
-      text-transform: uppercase;
-      font-size: 18px;
-      margin: 0 10px;
-      padding: 10px 30px;
-      border-radius: 5px;
-      background: #fff;
-      border: 2px solid #fff;
-      transition: 0.4s ease;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      text-decoration: none;
-      
-    }
-    
-    .content a:hover {
-      color: #fff;
-      background: rgba(255,255,255,0.3);
-    }
-    
-    section {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      padding: 80px 0 0;
-      
-    }
-    
-    section h2 {
-      font-size: 2rem;
-    }
-    
-    section > p {
-      text-align: center;
-    }
-    
-   
-    
-    footer {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      background: radial-gradient(759px at 14% 22.3%, rgb(10, 64, 88) 0%, rgb(15, 164, 102) 90%);
-      color: floralwhite;
-      padding: 10px 0; 
-      
-    }
-    
-    footer div {
-      padding: 0 10px;
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-    }
-    
-    footer span {
-      color: floralwhite;
-    }
-    
-    footer a {
-      padding: 0;
-    }
-    
-    @media screen and (max-width: 860px) {
-      .navbar .all-links {
-        position: fixed;
-        left: -100%;
-        width: 300px;
-        display: block;
-        height: 100vh;
-        top: 75px;
-        background: #333;
-        transition: left 0.3s ease;
-      }
-    
-      .navbar #menu-toggler:checked~.all-links {
-        left: 0;
-      }
-    
-      .navbar .all-links li {
-        font-size: 18px;
-      }
-    
-      .navbar #hamburger-btn {
-        display: block;
-      }
-    
-      section > p {
-        text-align: center;
-      }
-    
-      section .cards .card {
-        width: calc(100% / 2 - 15px);
-        margin-bottom: 30px;
-      }
-    
-      .homepage .content h1 {
-        font-size: 40px;
-        font-weight: 700;
-        margin-bottom: 10px;
-      }
-    
-      .homepage .content .text {
-        font-size: 17px;
-      }
-    
-      .content a {
-        font-size: 17px;
-        padding: 9px 20px;
-      }
-    
-      .contact .row {
-        flex-direction: column;
-      }
-    
-      .contact .row .col {
-        width: 100%;
-      }
-    
-      .contact .row .col:last-child {
-        margin-top: 40px;
-      }
-    
-      footer a {
-        height: 0;
-      }
-    }
-    
-    /*carousel part*/
-
-    .col-md-3
-    {
-    display: inline-block;
-    margin-left:-4px;
-    margin-right:-4px;
-    width:270px;
-    }
-    .carousel-indicators .active {
-    background-color: rgb(0, 85, 25);
-      }
-    .col-md-3 img{
-    width:100%;
-    height:auto;
-    }
-    body .carousel-indicator li{
-    background-color: rgb(0, 85, 25);
-    }
-    body .carousel-indicators{
-   
-    top:160px;
-    }
-  /*
-    body .carousel-control-prev-icon,
-    body .carousel-control-next-icon{
-    background-color: rgb(0, 85, 25);
-    }*/
-
-
-
-    /* Quotation Part */
-
-    .quote {
-      display: flex;
-      flex-direction: column;
-      background: url('{{ STATIC_URL }}/static/images/cur.avif');
-      padding: 3vw 10vw;
-      width: 75vw;
-      border:2px solid rgb(18, 84, 1);
-      text-align:center;
-
-    }
-    
-    .quote p {
-      font-size: 36px;
-      color:#000000;
-      font-weight: 300;
-      font-family: 'Sriracha';
-      text-align:center;
-    }
-    
-
-
-    </style>
-    <body>
-      <div class="hero">
-        <img style="height: 100px; width: 97px; border-radius:5px;padding:-0.5rem;left:1rem;top:-0.5rem; position: relative;aspect-ratio: 1 / 1; " src="{% static 'images/JIIT.png' %}">
-        <br>
-      <div class="hero-1 hero-cta">
-              <h1> MPMDB- Medicinal Plant Metabolite Database </h1>
-                  <h2><marquee width="100%" direction="left" height="100px" ><u>A comprehensive Medicinal Plant Metabolites Database</u>
-                  </marquee></h2>
-       </div>
-       
-          <img style="height: 100px; width:97px; border-radius:5px; padding: -0.5rem;top:-0.5rem; right:1rem; position:relative; aspect-ratio: 1 / 1;
-          " src="{% static 'images/GBU.jpg' %}">
-    </div>
-
-
-        <main>
-          <nav class="navbar">
-            <input type="checkbox" id="menu-toggler">
-            <label for="menu-toggler" id="hamburger-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
-                <path d="M0 0h24v24H0z" fill="none"/>
-                <path d="M3 18h18v-2H3v2zm0-5h18V11H3v2zm0-7v2h18V6H3z"/>
-              </svg>
-            </label>
-            <ul class="all-links">
-              <a href = "home.html" >
-                <p><i><b>Home</b></i></p> 
-              </a>
-      
-              <a href = "intro.html" >
-                <p><i><b>Introduction </b></i></p>
-              </a>
-      
-              <a href = "classification.html" >
-                <p><i><b>Taxonomy </b></i></p>
-              </a>
-      
-              <a href = "basic.html" >
-                <p><i><b>Botanical<br> Description </b></i></p>
-              </a>
-      
-              <a href = "genomes.html" >
-                <p><i><b>Genome Sequencing <br>Expression Profile</b></i></p>
-              </a>
-      
-              <a href = "transcriptom.html" >               
-                <p><i><b>Transcriptomics</b></i></p>
-              </a>
-      
-              <a href = " proteome.html" >               
-                <p><i><b>Proteomics</b></i></p>
-              </a>
-      
-              <a href = "metabolites.html" >
-                <p><i><b>Metabolomics</b></i></p>
-              </a>
-            </nav>
-            </main>
-
-    <div id="demo" class="carousel slide my-3" data-ride="carousel">
-      <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2" ></li>
-        <li data-target="#demo" data-slide-to="3" ></li>
-        <li data-target="#demo" data-slide-to="4" ></li>
-      </ul>
-  
-      <!--Slideshow starts here -->
-      <div class="container carousel-inner no-padding">
-  
-        <div class="carousel-item active">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/aloe.avif');">
-                  <h5 class="card-title" ><b>ALOEVERA</b></h5>
-                  <p class="card-text" ><u><i>(Aloe barbadensis Mill.)</i></u></p>
-                  <a href="aloevera.html"  class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-         </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/amla3.avif')">
-                <h5 class="card-title"><b>AMLA</b></h5>
-                <p class="card-text"><u><i>(Phyllanthus emblica)</i></u></p>
-                <a href="amla.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body"  style="background-image:url('{{ STATIC_URL }}/static/images/theme.png')">
-                <h5 class="card-title"><b>ASHWAGANDHA</b></h5>
-                <p class="card-text"><u><i>(Withania somnifera)</i></u></p>
-                <a href="ashwagandha.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/babool.avif')">
-                <h5 class="card-title"><b>BABOOL</b></h5>
-                <p class="card-text"><u><i>(Vachellia nilotica)</i></u></p>
-                <a href="babool.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-  
-  
-        <div class="carousel-item">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/bhring.avif')">
-                  <h5 class="card-title"><b>BHRINGRAJ</b></h5>
-                  <p class="card-text"><u><i>(Eclipta prostrata)</i></u></p>
-                  <a href="bhringraj.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cinn.jpg')" >
-                <h5 class="card-title"><b>CINNAMON</b></h5>
-                <p class="card-text"><u><i>(Cinnamomum verum)</i></u></p>
-                <a href="cinnamon.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/clove.jpg')" >
-                <h5 class="card-title"><b>CLOVE</b></h5>
-                <p class="card-text"><u><i>(Syzygium aromaticum)</i></u></p>
-                <a href="clove.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem;border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cumin.avif')">
-                <h5 class="card-title"><b>CUMIN</b></h5>
-                <p class="card-text"><u><i>(Cuminum cyminum)</i></u></p>
-                <a href="cumin.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="carousel-item">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cur.avif')">
-                  <h5 class="card-title"><b>CURRY LEAVES</b></h5>
-                  <p class="card-text"><u><i>(Murraya koenigii)</i></u></p>
-                  <a href="curry.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-         </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem;border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/euca.avif')">
-                <h5 class="card-title"><b>EUCALYPTUS</b></h5>
-                <p class="card-text"><u><i>(Eucalyptus tereticornis.)</i></u></p>
-                <a href="eucalyptus.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>  
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/ginger.avif')">
-                <h5 class="card-title"><b>GINGER</b></h5>
-                <p class="card-text"><u><i>(Zingiber officinale)</i></u></p>
-                <a href="ginger.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem;border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/lav.avif')">
-                <h5 class="card-title"><b>LAVENDER</b></h5>
-                <p class="card-text"><u><i>(Lavandula angustifolia. )</i></u></p>
-                <a href="lavender.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="carousel-item">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/mehndi.png')">
-                  <h5 class="card-title"><b>MEHNDI</b></h5>
-                  <p class="card-text"><u><i>(Lawsonia inermis)</i></u></p>
-                  <a href="mehndi.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-         </div> 
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem; border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/neem2.png')" >
-                <h5 class="card-title"><b>NEEM</b></h5>
-                <p class="card-text"><u><i>(Azadirachta indica)</i></u></p>
-                <a href="neem.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem;border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/pm2.avif')">
-                <h5 class="card-title"><b>PEPPERMINT</b></h5>
-                <p class="card-text"><u><i>(Mentha piperita)</i></u></p>
-                <a href="peppermint.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem;border-color:#000000">
-              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/tulsi.jpeg')">
-                <h5 class="card-title" ><b>TULSI</b></h5>
-                <p class="card-text"  ><u><i>(Ocimum tenuiflorum)</i></u></p>
-                <a href="tulsi.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000"  >Run</a>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="carousel-item">
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            <div class="card" style="width: 15rem;border-color:#000000">
-              <div class="card-body" style="background: rgb(244, 253, 0);
+{% block content %}
+<div class="legacy-page">
+<div class="hero">
+<img src="{% static 'images/JIIT.png' %}" style="height: 100px; width: 97px; border-radius:5px;padding:-0.5rem;left:1rem;top:-0.5rem; position: relative;aspect-ratio: 1 / 1; "/>
+<br/>
+<div class="hero-1 hero-cta">
+<h1> MPMDB- Medicinal Plant Metabolite Database </h1>
+<h2><marquee direction="left" height="100px" width="100%"><u>A comprehensive Medicinal Plant Metabolites Database</u>
+</marquee></h2>
+</div>
+<img src="{% static 'images/GBU.jpg' %}" style="height: 100px; width:97px; border-radius:5px; padding: -0.5rem;top:-0.5rem; right:1rem; position:relative; aspect-ratio: 1 / 1;
+          "/>
+</div>
+<main>
+<nav class="navbar">
+<input id="menu-toggler" type="checkbox"/>
+<label for="menu-toggler" id="hamburger-btn">
+<svg fill="white" height="24px" viewbox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h24v24H0z" fill="none"></path>
+<path d="M3 18h18v-2H3v2zm0-5h18V11H3v2zm0-7v2h18V6H3z"></path>
+</svg>
+</label>
+<ul class="all-links">
+<a href="home.html">
+<p><i><b>Home</b></i></p>
+</a>
+<a href="intro.html">
+<p><i><b>Introduction </b></i></p>
+</a>
+<a href="classification.html">
+<p><i><b>Taxonomy </b></i></p>
+</a>
+<a href="basic.html">
+<p><i><b>Botanical<br/> Description </b></i></p>
+</a>
+<a href="genomes.html">
+<p><i><b>Genome Sequencing <br/>Expression Profile</b></i></p>
+</a>
+<a href="transcriptom.html">
+<p><i><b>Transcriptomics</b></i></p>
+</a>
+<a href=" proteome.html">
+<p><i><b>Proteomics</b></i></p>
+</a>
+<a href="metabolites.html">
+<p><i><b>Metabolomics</b></i></p>
+</a>
+<a href="plantbot.html">
+<p><i><b>Plant Bot AI</b></i></p>
+</a>
+</ul></nav>
+</main>
+<div class="carousel slide my-3" data-ride="carousel" id="demo">
+<ul class="carousel-indicators">
+<li class="active" data-slide-to="0" data-target="#demo"></li>
+<li data-slide-to="1" data-target="#demo"></li>
+<li data-slide-to="2" data-target="#demo"></li>
+<li data-slide-to="3" data-target="#demo"></li>
+<li data-slide-to="4" data-target="#demo"></li>
+</ul>
+<!--Slideshow starts here -->
+<div class="container carousel-inner no-padding">
+<div class="carousel-item active">
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/aloe.avif');">
+<h5 class="card-title"><b>ALOEVERA</b></h5>
+<p class="card-text"><u><i>(Aloe barbadensis Mill.)</i></u></p>
+<a class="btn btn-primary" href="aloevera.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/amla3.avif')">
+<h5 class="card-title"><b>AMLA</b></h5>
+<p class="card-text"><u><i>(Phyllanthus emblica)</i></u></p>
+<a class="btn btn-primary" href="amla.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/theme.png')">
+<h5 class="card-title"><b>ASHWAGANDHA</b></h5>
+<p class="card-text"><u><i>(Withania somnifera)</i></u></p>
+<a class="btn btn-primary" href="ashwagandha.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/babool.avif')">
+<h5 class="card-title"><b>BABOOL</b></h5>
+<p class="card-text"><u><i>(Vachellia nilotica)</i></u></p>
+<a class="btn btn-primary" href="babool.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+</div>
+<div class="carousel-item">
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/bhring.avif')">
+<h5 class="card-title"><b>BHRINGRAJ</b></h5>
+<p class="card-text"><u><i>(Eclipta prostrata)</i></u></p>
+<a class="btn btn-primary" href="bhringraj.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cinn.jpg')">
+<h5 class="card-title"><b>CINNAMON</b></h5>
+<p class="card-text"><u><i>(Cinnamomum verum)</i></u></p>
+<a class="btn btn-primary" href="cinnamon.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/clove.jpg')">
+<h5 class="card-title"><b>CLOVE</b></h5>
+<p class="card-text"><u><i>(Syzygium aromaticum)</i></u></p>
+<a class="btn btn-primary" href="clove.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem;border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cumin.avif')">
+<h5 class="card-title"><b>CUMIN</b></h5>
+<p class="card-text"><u><i>(Cuminum cyminum)</i></u></p>
+<a class="btn btn-primary" href="cumin.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+</div>
+<div class="carousel-item">
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cur.avif')">
+<h5 class="card-title"><b>CURRY LEAVES</b></h5>
+<p class="card-text"><u><i>(Murraya koenigii)</i></u></p>
+<a class="btn btn-primary" href="curry.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem;border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/euca.avif')">
+<h5 class="card-title"><b>EUCALYPTUS</b></h5>
+<p class="card-text"><u><i>(Eucalyptus tereticornis.)</i></u></p>
+<a class="btn btn-primary" href="eucalyptus.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/ginger.avif')">
+<h5 class="card-title"><b>GINGER</b></h5>
+<p class="card-text"><u><i>(Zingiber officinale)</i></u></p>
+<a class="btn btn-primary" href="ginger.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem;border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/lav.avif')">
+<h5 class="card-title"><b>LAVENDER</b></h5>
+<p class="card-text"><u><i>(Lavandula angustifolia. )</i></u></p>
+<a class="btn btn-primary" href="lavender.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+</div>
+<div class="carousel-item">
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/mehndi.png')">
+<h5 class="card-title"><b>MEHNDI</b></h5>
+<p class="card-text"><u><i>(Lawsonia inermis)</i></u></p>
+<a class="btn btn-primary" href="mehndi.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem; border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/neem2.png')">
+<h5 class="card-title"><b>NEEM</b></h5>
+<p class="card-text"><u><i>(Azadirachta indica)</i></u></p>
+<a class="btn btn-primary" href="neem.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem;border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/pm2.avif')">
+<h5 class="card-title"><b>PEPPERMINT</b></h5>
+<p class="card-text"><u><i>(Mentha piperita)</i></u></p>
+<a class="btn btn-primary" href="peppermint.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem;border-color:#000000">
+<div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/tulsi.jpeg')">
+<h5 class="card-title"><b>TULSI</b></h5>
+<p class="card-text"><u><i>(Ocimum tenuiflorum)</i></u></p>
+<a class="btn btn-primary" href="tulsi.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+</div>
+<div class="carousel-item">
+<div class="col-xs-3 col-sm-3 col-md-3">
+<div class="card" style="width: 15rem;border-color:#000000">
+<div class="card-body" style="background: rgb(244, 253, 0);
               ">
-                  <h5 class="card-title"><b>TURMERIC</b></h5>
-                  <p class="card-text"><u><i>(Curcuma longa)</i></u></p>
-                  <a href="turmeric.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
-              </div>
-            </div>
-         </div>
-      </div>
-  </div> 
-  
-      <!-- left and right controls for the slide 
+<h5 class="card-title"><b>TURMERIC</b></h5>
+<p class="card-text"><u><i>(Curcuma longa)</i></u></p>
+<a class="btn btn-primary" href="turmeric.html" style="background-color:#1c6506; border-color:#000000">Run</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- left and right controls for the slide 
       <a class="carousel-control-prev" href="#demo" data-slide="prev" >
           <span class="carousel-control-prev-icon"></span>
       </a>
       <a class="carousel-control-next" href="#demo" data-slide="next" >
           <span class="carousel-control-next-icon"></span>
       </a>-->
-  
-  
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-      <br> <br><br><br>
 
-      <div class="bx quote">
-        <marquee class="blink"><p style="font-size: 50px;font-weight: 500;color:#012d0e;" ><u> Curry Leaf <i>(Murraya koenigii)</i></u></p></marquee>
 
-        <p style="font-size: 25px; text-align: justify">
+<br/> <br/><br/><br/>
+<div class="bx quote">
+<marquee class="blink"><p style="font-size: 50px;font-weight: 500;color:#012d0e;"><u> Curry Leaf <i>(Murraya koenigii)</i></u></p></marquee>
+<p style="font-size: 25px; text-align: justify">
 Curry leaf, also known as kadi patta, is a leafy herb native to the Indian subcontinent and is commonly used in Indian, Sri Lankan, and other South Asian cuisines. It is highly valued for its distinct flavor and aroma, which adds a unique taste to various dishes.
-<br><br>Curry leaves contain various antioxidants, including flavonoids and phenolic compounds. These antioxidants help scavenge harmful free radicals in the body and may have potential health benefits.
-<br><br>While curry leaves are primarily used in small quantities as a seasoning, they do contain certain nutrients. They are a good source of vitamin A, vitamin C, calcium, iron, and fiber. 
+<br/><br/>Curry leaves contain various antioxidants, including flavonoids and phenolic compounds. These antioxidants help scavenge harmful free radicals in the body and may have potential health benefits.
+<br/><br/>While curry leaves are primarily used in small quantities as a seasoning, they do contain certain nutrients. They are a good source of vitamin A, vitamin C, calcium, iron, and fiber. 
 </p>
-           
-          <br>
-          <h2 style="font-size: 28px;color:#1c6506;"> <b><u>Nutritional Value of Curry Leaf :</b></u> </h2><br>
-          <ul style="font-size: 25px; text-align: justify">The nutrients found are:<br>
-            <br><li><b>Calories:</b>Curry leaves are very low in calories, with approximately 6 calories per 10 grams (about 1 cup).</li>
-            <br><li><b>Carbohydrates:</b>Curry leaves contain a small amount of carbohydrates, providing around 1 gram per 10 grams.</li>
-            <br><li><b>Fiber:</b>They are a good source of dietary fiber, with about 0.6 grams per 10 grams.</li>
-            <br><li><b>Vitamins:</b>Curry leaves are rich in various vitamins, including vitamin A, vitamin C, vitamin E, vitamin B6, and folate.</li>
-          </ul>
+<br/>
+<h2 style="font-size: 28px;color:#1c6506;"> <b><u>Nutritional Value of Curry Leaf :</u></b> </h2><br/>
+<ul style="font-size: 25px; text-align: justify">The nutrients found are:<br/>
+<br/><li><b>Calories:</b>Curry leaves are very low in calories, with approximately 6 calories per 10 grams (about 1 cup).</li>
+<br/><li><b>Carbohydrates:</b>Curry leaves contain a small amount of carbohydrates, providing around 1 gram per 10 grams.</li>
+<br/><li><b>Fiber:</b>They are a good source of dietary fiber, with about 0.6 grams per 10 grams.</li>
+<br/><li><b>Vitamins:</b>Curry leaves are rich in various vitamins, including vitamin A, vitamin C, vitamin E, vitamin B6, and folate.</li>
+</ul>
+<br/><br/>
+<h2 style="font-size: 28px;color:#1c6506;"> <b><u>Properties of Curry Leaf :</u></b> </h2><br/>
+<ul style="font-size: 25px; text-align: justify">
+<li><b>Anti-Inflammatory Properties:</b>Studies have indicated that curry leaves exhibit anti-inflammatory effects. The bioactive compounds in curry leaves, such as alkaloids and flavonoids, may help reduce inflammation and alleviate associated symptoms.</li>
+<br/><li><b>Digestive Aid:</b>Curry leaves have traditionally been used to aid digestion and promote gastrointestinal health. </li>
+<br/><li><b>Anti-Microbial Activity:</b>Curry leaves possess antimicrobial properties, including antibacterial and antifungal effects.  </li>
+<br/><li><b>Aromatic and Flavorful:</b>Curry leaves are renowned for their strong, distinct aroma and flavor.  </li>
+</ul>
+<br/><br/>
+<h2 style="font-size: 28px;color:#1c6506;"> <b><u>Side Effects of Curry Leaf :</u></b> </h2><br/>
+<ul style="font-size: 25px; text-align: justify">
+<li><b>Allergic Reactions:</b>Some people may be allergic to curry leaves or other plants in the same family, such as citrus fruits. Allergic reactions can vary in severity and may include symptoms like skin rashes, itching, swelling, or difficulty breathing. </li>
+<br/><li><b>Gastrointestinal Sensitivities:</b>In some cases, individuals may experience mild gastrointestinal discomfort after consuming curry leaves. This can include symptoms such as stomach pain, bloating, gas, or diarrhea </li>
+<br/><li><b>Oxalate Content:</b>Curry leaves contain a moderate amount of oxalates. Individuals with a history of calcium oxalate kidney stones or kidney disorders may need to moderate their intake of foods high in oxalates, including curry leaves.</li>
+<br/><li><b>Pregnancy and Breastfeeding:</b>There is limited information available on the safety of consuming curry leaves during pregnancy and breastfeeding.</li>
+</ul>
+<br/><br/>
+<h2 style="font-size: 28px;color:#1c6506;"> <b><u>Interactions with other Drugs :</u></b> </h2><br/>
+<ul style="font-size: 25px; text-align: justify">It is essential to take precautions when using Curry Leaf with:<br/>
+<br/><li>Being a culinary ingredient, curry leaves are typically consumed in small amounts and are not known to cause significant interactions with common medications</li>
+</ul>
+<br/>
+<img src="{% static 'images/curry.jpg' %}" style="width: 700px; height:700px; display: block; margin-left: auto; margin-right: auto;"/>
+</div>
+</div>
 
-          <br><br>
-          <h2 style="font-size: 28px;color:#1c6506;"> <b><u>Properties of Curry Leaf :</b></u> </h2><br>
-          <ul style="font-size: 25px; text-align: justify">
-            <li><b>Anti-Inflammatory Properties:</b>Studies have indicated that curry leaves exhibit anti-inflammatory effects. The bioactive compounds in curry leaves, such as alkaloids and flavonoids, may help reduce inflammation and alleviate associated symptoms.</li>
-            <br><li><b>Digestive Aid:</b>Curry leaves have traditionally been used to aid digestion and promote gastrointestinal health. </li>
-            <br><li><b>Anti-Microbial Activity:</b>Curry leaves possess antimicrobial properties, including antibacterial and antifungal effects.  </li>
-            <br><li><b>Aromatic and Flavorful:</b>Curry leaves are renowned for their strong, distinct aroma and flavor.  </li>
-          </ul>
+<footer>
+<div>
+<span>Copyright © Jaypee Institute Of Information Technology, UP and  Gujarat Biotechnology University, Gujarat</span>
+<span class="link">
+<a href="#">Top</a>
+<a href="home.html">Home</a>
+</span>
+</div>
+</footer>
+{% endblock %}
 
-          <br><br>
-          <h2 style="font-size: 28px;color:#1c6506;"> <b><u>Side Effects of Curry Leaf :</b></u> </h2><br>
-          <ul style="font-size: 25px; text-align: justify">
-            <li><b>Allergic Reactions:</b>Some people may be allergic to curry leaves or other plants in the same family, such as citrus fruits. Allergic reactions can vary in severity and may include symptoms like skin rashes, itching, swelling, or difficulty breathing. </li>
-            <br><li><b>Gastrointestinal Sensitivities:</b>In some cases, individuals may experience mild gastrointestinal discomfort after consuming curry leaves. This can include symptoms such as stomach pain, bloating, gas, or diarrhea </li>
-            <br><li><b>Oxalate Content:</b>Curry leaves contain a moderate amount of oxalates. Individuals with a history of calcium oxalate kidney stones or kidney disorders may need to moderate their intake of foods high in oxalates, including curry leaves.</li>
-            <br><li><b>Pregnancy and Breastfeeding:</b>There is limited information available on the safety of consuming curry leaves during pregnancy and breastfeeding.</li>
-          </ul>
-
-          <br><br>
-          <h2 style="font-size: 28px;color:#1c6506;"> <b><u>Interactions with other Drugs :</b></u> </h2><br>
-          <ul style="font-size: 25px; text-align: justify">It is essential to take precautions when using Curry Leaf with:<br>
-            <br><li>Being a culinary ingredient, curry leaves are typically consumed in small amounts and are not known to cause significant interactions with common medications</li>
-          </ul>
-
-
-<br>
-        
-          <img style="width: 700px; height:700px; display: block; margin-left: auto; margin-right: auto;" src="{% static 'images/curry.jpg' %}" >
-        </div>
-        </div>
-    
-      </div>
-  <footer>
-    <div>
-      <span>Copyright © Jaypee Institute Of Information Technology, UP and  Gujarat Biotechnology University, Gujarat</span>
-      <span class="link">
-          <a href="#">Top</a>
-          <a href="home.html">Home</a>
-          
-      </span>
-    </div>
-  </footer>
-</body>
-</html>
-            
+{% block extra_scripts %}
+<script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+{% endblock %}

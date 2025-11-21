@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}MPMDB · Plant Bot{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="section-header">
+    <h1>Plant Bot · Experimental AI assistant</h1>
+    <p>
+      Prototype ideas, triage plants, and surface relevant database links.
+      Responses stream from the backend assistant and are logged for future
+      curation.
+    </p>
+  </div>
+
+  <div class="bot-shell">
+    <aside class="bot-panel">
+      <h3>How to interact</h3>
+      <ul>
+        <li>Ask for metabolite classes for a specific plant.</li>
+        <li>Request omics layers (genome, transcriptome, proteome).</li>
+        <li>Query therapeutic themes such as anti-inflammatory.</li>
+      </ul>
+      <p style="font-size: 0.9rem; color: var(--text-muted)">
+        Example: “What metabolites make Tulsi effective against viral
+        infections?”
+      </p>
+      <div style="margin-top: 1.25rem">
+        <h4 style="margin-bottom: 0.5rem">Suggested prompts</h4>
+        <button
+          type="button"
+          class="secondary"
+          style="border-radius: 999px; padding: 0.6rem 1rem; border: 1px solid rgba(15, 109, 95, 0.3); background: transparent; cursor: pointer; margin-bottom: 0.4rem"
+          data-prompt="List key alkaloids in Ashwagandha."
+        >
+          Ashwagandha alkaloids
+        </button>
+        <button
+          type="button"
+          class="secondary"
+          style="border-radius: 999px; padding: 0.6rem 1rem; border: 1px solid rgba(15, 109, 95, 0.3); background: transparent; cursor: pointer; margin-bottom: 0.4rem"
+          data-prompt="Does Neem carry transcriptome evidence for anti-fungal activity?"
+        >
+          Neem transcriptome
+        </button>
+        <button
+          type="button"
+          class="secondary"
+          style="border-radius: 999px; padding: 0.6rem 1rem; border: 1px solid rgba(15, 109, 95, 0.3); background: transparent; cursor: pointer"
+          data-prompt="What proteomic insights exist for Turmeric?"
+        >
+          Turmeric proteomics
+        </button>
+      </div>
+    </aside>
+    <section class="chat-window">
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-bubble bot">
+          Hi! I am the Plant Bot. Ask me about a medicinal plant, the
+          omics layer you need, or the pharmacological activity of
+          interest.
+        </div>
+      </div>
+      <div class="chat-status" id="chatStatus" aria-live="polite"></div>
+      <form class="chat-input" id="chatForm">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Ask about a plant, metabolite, or omics layer..."
+          required
+        />
+        <button type="submit" id="chatSubmit">Send</button>
+      </form>
+    </section>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  const getCookie = (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i += 1) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  };
+
+  const csrfToken = getCookie("csrftoken");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput");
+  const chatMessages = document.getElementById("chatMessages");
+  const chatStatus = document.getElementById("chatStatus");
+  const chatSubmit = document.getElementById("chatSubmit");
+  const promptButtons = document.querySelectorAll("[data-prompt]");
+  const API_URL = "/api/plantbot/";
+  const params = new URLSearchParams(window.location.search);
+  const focus = params.get("focus");
+  const prefill = params.get("prefill");
+  const focusCopy = {
+    genomics: {
+      placeholder: "Ask for genome assemblies, mRNA counts, or sequencing notes.",
+      status: "Sequencing bot mode – genome and assembly context will be prioritised.",
+    },
+    proteomics: {
+      placeholder: "Ask for proteomic coverage or peptide evidence for a plant.",
+      status: "Proteomics focus enabled. Mention a plant plus proteins/peptides of interest.",
+    },
+    transcriptomics: {
+      placeholder: "Ask for RNA-Seq, SRA, or transcriptomic studies for a plant.",
+      status: "Transcriptomics focus enabled. Include a plant to retrieve expression studies.",
+    },
+    taxonomy: {
+      placeholder: "Ask for taxonomy, NCBI IDs, or lineage of any species.",
+      status: "Taxonomy focus enabled. Provide a common or scientific name.",
+    },
+  };
+
+  promptButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      chatInput.value = btn.dataset.prompt;
+      chatInput.focus();
+    });
+  });
+
+  const appendBubble = (text, role = "user") => {
+    const bubble = document.createElement("div");
+    bubble.className = `chat-bubble ${role}`;
+    bubble.textContent = text;
+    chatMessages.appendChild(bubble);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  const setStatus = (type, message) => {
+    chatStatus.textContent = message || "";
+    chatStatus.dataset.state = type || "";
+  };
+
+  if (prefill) {
+    chatInput.value = prefill;
+    chatInput.focus();
+  }
+
+  if (focus && focusCopy[focus]) {
+    chatInput.placeholder = focusCopy[focus].placeholder;
+    setStatus("info", focusCopy[focus].status);
+  }
+
+  if (prefill) {
+    setTimeout(() => {
+      if (chatInput.value.trim()) {
+        chatForm.requestSubmit();
+      }
+    }, 350);
+  }
+
+  chatForm.addEventListener("submit", async (evt) => {
+    evt.preventDefault();
+    const question = chatInput.value.trim();
+    if (!question) return;
+    appendBubble(question, "user");
+    chatInput.value = "";
+    chatInput.focus();
+
+    try {
+      setStatus("loading", "Consulting medicinal plant knowledge base…");
+      chatSubmit.disabled = true;
+      const payload = { question };
+      if (focus) {
+        payload.focus = focus;
+      }
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRFToken": csrfToken || "",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+
+      const data = await response.json();
+      appendBubble(data.answer, "bot");
+      if (data.source) {
+        appendBubble(`Source: ${data.source}`, "bot");
+      }
+      setStatus("success", "Response generated.");
+    } catch (error) {
+      console.error(error);
+      setStatus(
+        "error",
+        "We could not retrieve an answer. Please retry or adjust your query."
+      );
+    } finally {
+      chatSubmit.disabled = false;
+    }
+  });
+</script>
+{% endblock %}
+

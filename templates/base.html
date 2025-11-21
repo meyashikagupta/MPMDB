@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/en/5/56/Logo-jiit.png"
+    />
+    <link rel="stylesheet" href="{% static 'css/site.css' %}" />
+    <title>{% block page_title %}MPMDB · Medicinal Plant Metabolite Database{% endblock %}</title>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body id="top">
+    <div class="page-shell">
+      <header class="mpmdb-nav">
+        <div class="inner">
+          <a class="site-mark" href="home.html">
+            <div class="site-mark-text">
+              <strong>MPMDB</strong>
+              <span>Medicinal Plant Metabolite DB</span>
+            </div>
+          </a>
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            &#9776;
+          </button>
+          <nav class="nav-links" id="navLinks">
+            <a href="home.html" class="{% if request.path == '/' or request.path == '/home.html' %}active{% endif %}"
+              >Home</a
+            >
+            <a href="intro.html" class="{% if request.path == '/intro.html' %}active{% endif %}"
+              >Introduction</a
+            >
+            <a href="classification.html" class="{% if request.path == '/classification.html' %}active{% endif %}"
+              >Taxonomy</a
+            >
+            <a href="basic.html" class="{% if request.path == '/basic.html' %}active{% endif %}"
+              >Botanical Description</a
+            >
+            <a href="genomes.html" class="{% if request.path == '/genomes.html' %}active{% endif %}"
+              >Genome & Expression</a
+            >
+            <a href="transcriptom.html" class="{% if request.path == '/transcriptom.html' %}active{% endif %}"
+              >Transcriptomics</a
+            >
+            <a href="proteome.html" class="{% if request.path == '/proteome.html' %}active{% endif %}"
+              >Proteomics</a
+            >
+            <a href="metabolites.html" class="{% if request.path == '/metabolites.html' %}active{% endif %}"
+              >Metabolomics</a
+            >
+            <a
+              href="plantbot.html"
+              class="nav-cta {% if request.path == '/plantbot.html' %}active{% endif %}"
+              >Plant Bot</a
+            >
+          </nav>
+        </div>
+      </header>
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+      <footer>
+        <div class="inner">
+          <small>
+            © Jaypee Institute of Information Technology · Gujarat
+            Biotechnology University
+          </small>
+          <a href="#top">Back to top</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+      navToggle?.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
+
+      document.addEventListener("click", (evt) => {
+        if (
+          !navLinks.contains(evt.target) &&
+          !navToggle.contains(evt.target)
+        ) {
+          navLinks.classList.remove("open");
+        }
+      });
+
+      const initCarousel = (shell) => {
+        const track = shell.querySelector("[data-carousel-track]");
+        const buttons = shell.querySelectorAll("[data-carousel-nav]");
+        const progress = shell.querySelector("[data-carousel-progress]");
+        if (!track) return;
+
+        const updateProgress = () => {
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          if (maxScroll <= 0) {
+            progress && (progress.style.width = "100%");
+            return;
+          }
+          const ratio = track.scrollLeft / maxScroll;
+          const percent = Math.max(0.15, ratio) * 100;
+          progress && (progress.style.width = percent + "%");
+        };
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const direction = btn.dataset.carouselNav === "next" ? 1 : -1;
+            const delta = track.clientWidth * 0.85 * direction;
+            track.scrollBy({ left: delta, behavior: "smooth" });
+          });
+        });
+
+        track.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress();
+      };
+
+      document
+        .querySelectorAll("[data-plant-carousel]")
+        .forEach(initCarousel);
+    </script>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>
+
