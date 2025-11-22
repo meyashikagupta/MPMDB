@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import json
 
 from django.http import JsonResponse
@@ -6,6 +7,10 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 
 from .services.plantbot import generate_answer
+=======
+from django.http import HttpResponse
+from django.shortcuts import render
+>>>>>>> b0548c3294d8b00c66890a6c51f462e421424374
 
 # Create your views here
 def home_view(request, *args, **kwargs):
@@ -65,6 +70,7 @@ def tulsi_view(request, *args, **kwargs):
 def turmeric_view(request, *args, **kwargs):
     return render (request, "turmeric.html", {})
 
+<<<<<<< HEAD
 @ensure_csrf_cookie
 def plantbot_view(request, *args, **kwargs):
     return render(request, "plantbot.html", {})
@@ -89,3 +95,5 @@ def plantbot_api(request, *args, **kwargs):
     answer, source = generate_answer(question, focus=focus)
     return JsonResponse({"answer": answer, "source": source})
 
+=======
+>>>>>>> b0548c3294d8b00c66890a6c51f462e421424374

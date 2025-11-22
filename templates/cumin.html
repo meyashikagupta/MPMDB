@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 {% load static %}
 
@@ -241,12 +242,683 @@
 </div>
 </div>
 <!-- left and right controls for the slide 
+=======
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/en/5/56/Logo-jiit.png"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title> Medicinal Plant Metabolite Database </title>
+    <!-- Fontawesome Link for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+    * {
+      margin: 0px;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      background: url('{{ STATIC_URL }}/static/images/cumin.avif');
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    overflow-x: hidden;
+      justify-content: center;
+      align-items: center;
+      background-size: cover; 
+      background-attachment: fixed;
+
+  }
+  
+  ::-webkit-scrollbar {
+    color: #000000;
+    display: none;
+}
+
+  
+/* Header Part */   
+
+
+.hero {
+  display: flex;
+  background:  url('{{ STATIC_URL }}/static/images/hi.avif');
+  opacity: 100%;
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  overflow-x: hidden; 
+  top: 0;
+  left: 0;
+  z-index: auto;
+  background-size: cover;   
+}
+
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  max-width: 1500vw;
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+  height:auto;
+  padding: 25px 75px 0px 75px;
+  margin: 0.5vh 1.5vw 0vh 1.5vw;
+}
+
+.hero-cta p {
+  font-family: 'Roboto', arial;
+  opacity: 0.7;
+  color:#135807; 
+  margin: 1rem 0px 1rem 0px;
+}
+
+@media screen and (min-width: 836vw){
+  .hero-cta {
+    height: 280vh;
+  }
+}
+
+h1 {
+    font-size: 45px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: 'roboto',arial ;
+    text-align:center;
+
+}
+    
+    h2 {
+        font-size: 30px;
+        color: #ffffff;
+        font-family: 'roboto',arial ;
+        text-align:center;
+    }
+    
+    h3 {
+        font-size: 50px;
+        color: #012d0e;
+        font-family: 'roboto',arial ;
+        text-align:center;
+    }
+    
+    .icon {
+      padding: 1rem  1rem;
+      margin-left: 1 rem;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      aspect-ratio: 1 / 1;
+    }
+
+    .icon2 {
+      padding: 1rem 1rem;
+      margin-left: 1 rem;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      aspect-ratio: 1 / 1;
+    
+    }
+
+    /* Navbar Part */
+    main {
+      top: 0;
+      left: 0;
+      z-index: 5;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background:  linear-gradient(114.3deg, rgb(19, 126, 57) 0.2%, rgb(8, 65, 91) 68.5%);
+    }
+    
+    .navbar {
+      display: flex;
+      padding: 0 5px;
+      max-width: 1200px;
+      width: 100%;
+      align-items: center;
+      justify-content: space-evenly;
+      overflow: hidden;
+      height:100%;
+    }
+
+    .navbar a{
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      padding: 10px 19px;
+      font-family: sans-serif;
+      font-size:18px;
+      }
+
+    .navbar a:hover{
+        color:mediumseagreen;
+      }
+    
+    .navbar input#menu-toggler {
+      display: none;
+    }
+    
+    .navbar #hamburger-btn {
+      cursor: pointer;
+      display: none;
+    }
+    
+    .navbar .all-links {
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar .all-links li {
+      position: relative;
+      list-style: none;
+    }
+    
+    header a, footer a {
+      margin-left: 40px;
+      text-decoration: none;
+      color: #fff;
+      height: 100%;
+      padding: 20px 0;
+      display: inline-block;
+    }
+    
+    header a:hover, footer a:hover {
+      color: #ddd;
+    }
+    
+
+    .homepage .content {
+      display: flex;
+      height: auto;
+      z-index: 3;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      
+    }
+    
+    .homepage .content h1 {
+      font-size: 60px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    
+    .homepage .content .text {
+      margin-bottom: auto;
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .content a {
+      color: #000;
+      display: block;
+      text-transform: uppercase;
+      font-size: 18px;
+      margin: 0 10px;
+      padding: 10px 30px;
+      border-radius: 5px;
+      background: #fff;
+      border: 2px solid #fff;
+      transition: 0.4s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+      
+    }
+    
+    .content a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.3);
+    }
+    
+    section {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 80px 0 0;
+      
+    }
+    
+    section h2 {
+      font-size: 2rem;
+    }
+    
+    section > p {
+      text-align: center;
+    }
+    
+   
+    
+    footer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: radial-gradient(759px at 14% 22.3%, rgb(10, 64, 88) 0%, rgb(15, 164, 102) 90%);
+      color: floralwhite;
+      padding: 10px 0; 
+      
+    }
+    
+    footer div {
+      padding: 0 10px;
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    footer span {
+      color: floralwhite;
+    }
+    
+    footer a {
+      padding: 0;
+    }
+    
+    @media screen and (max-width: 860px) {
+      .navbar .all-links {
+        position: fixed;
+        left: -100%;
+        width: 300px;
+        display: block;
+        height: 100vh;
+        top: 75px;
+        background: #333;
+        transition: left 0.3s ease;
+      }
+    
+      .navbar #menu-toggler:checked~.all-links {
+        left: 0;
+      }
+    
+      .navbar .all-links li {
+        font-size: 18px;
+      }
+    
+      .navbar #hamburger-btn {
+        display: block;
+      }
+    
+      section > p {
+        text-align: center;
+      }
+    
+      section .cards .card {
+        width: calc(100% / 2 - 15px);
+        margin-bottom: 30px;
+      }
+    
+      .homepage .content h1 {
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+    
+      .homepage .content .text {
+        font-size: 17px;
+      }
+    
+      .content a {
+        font-size: 17px;
+        padding: 9px 20px;
+      }
+    
+      .contact .row {
+        flex-direction: column;
+      }
+    
+      .contact .row .col {
+        width: 100%;
+      }
+    
+      .contact .row .col:last-child {
+        margin-top: 40px;
+      }
+    
+      footer a {
+        height: 0;
+      }
+    }
+    
+    /*carousel part*/
+
+    .col-md-3
+    {
+    display: inline-block;
+    margin-left:-4px;
+    margin-right:-4px;
+    width:270px;
+    }
+    .carousel-indicators .active {
+    background-color: rgb(0, 85, 25);
+      }
+    .col-md-3 img{
+    width:100%;
+    height:auto;
+    }
+    body .carousel-indicator li{
+    background-color: rgb(0, 85, 25);
+    }
+    body .carousel-indicators{
+   
+    top:160px;
+    }
+  /*
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon{
+    background-color: rgb(0, 85, 25);
+    }*/
+
+
+
+    /* Quotation Part */
+
+    .quote {
+      display: flex;
+      flex-direction: column;
+      background:#B0FFB9;
+      padding: 3vw 10vw;
+      width: 75vw;
+      border:2px solid rgb(18, 84, 1);
+      text-align:center;
+
+    }
+    
+    .quote p {
+      font-size: 36px;
+      color:#000000;
+      font-weight: 300;
+      font-family: 'Sriracha';
+      text-align:center;
+    }
+    
+
+
+    </style>
+    
+    <body>
+      <div class="hero">
+        <img style="height: 100px; width: 97px; border-radius:5px;padding:-0.5rem;left:1rem;top:-0.5rem; position: relative;aspect-ratio: 1 / 1; " src="{% static 'images/JIIT.png' %}">
+        <br>
+      <div class="hero-1 hero-cta">
+              <h1> MPMDB- Medicinal Plant Metabolite Database </h1>
+                  <h2><marquee width="100%" direction="left" height="100px" ><u>A comprehensive Medicinal Plant Metabolites Database</u>
+                  </marquee></h2>
+       </div>
+       
+          <img style="height: 100px; width:97px; border-radius:5px; padding: -0.5rem;top:-0.5rem; right:1rem; position:relative; aspect-ratio: 1 / 1;
+          " src="{% static 'images/GBU.jpg' %}">
+    </div>
+
+        <main>
+          <nav class="navbar">
+            <input type="checkbox" id="menu-toggler">
+            <label for="menu-toggler" id="hamburger-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 18h18v-2H3v2zm0-5h18V11H3v2zm0-7v2h18V6H3z"/>
+              </svg>
+            </label>
+            <ul class="all-links">
+              <a href = "home.html" >
+                <p><i><b>Home</b></i></p> 
+              </a>
+      
+              <a href = "intro.html" >
+                <p><i><b>Introduction </b></i></p>
+              </a>
+      
+              <a href = "classification.html" >
+                <p><i><b>Taxonomy </b></i></p>
+              </a>
+      
+              <a href = "basic.html" >
+                <p><i><b>Botanical<br> Description </b></i></p>
+              </a>
+      
+              <a href = "genomes.html" >
+                <p><i><b>Genome Sequencing <br>Expression Profile</b></i></p>
+              </a>
+      
+              <a href = "transcriptom.html" >               
+                <p><i><b>Transcriptomics</b></i></p>
+              </a>
+      
+              <a href = " proteome.html" >               
+                <p><i><b>Proteomics</b></i></p>
+              </a>
+      
+              <a href = "metabolites.html" >
+                <p><i><b>Metabolomics</b></i></p>
+              </a>
+            </nav>
+            </main>
+
+    <div id="demo" class="carousel slide my-3" data-ride="carousel">
+      <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2" ></li>
+        <li data-target="#demo" data-slide-to="3" ></li>
+        <li data-target="#demo" data-slide-to="4" ></li>
+      </ul>
+  
+      <!--Slideshow starts here -->
+      <div class="container carousel-inner no-padding">
+  
+        <div class="carousel-item active">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/aloe.avif');">
+                  <h5 class="card-title" ><b>ALOEVERA</b></h5>
+                  <p class="card-text" ><u><i>(Aloe barbadensis Mill.)</i></u></p>
+                  <a href="aloevera.html"  class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+         </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/amla3.avif')">
+                <h5 class="card-title"><b>AMLA</b></h5>
+                <p class="card-text"><u><i>(Phyllanthus emblica)</i></u></p>
+                <a href="amla.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body"  style="background-image:url('{{ STATIC_URL }}/static/images/theme.png')">
+                <h5 class="card-title"><b>ASHWAGANDHA</b></h5>
+                <p class="card-text"><u><i>(Withania somnifera)</i></u></p>
+                <a href="ashwagandha.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/babool.avif')">
+                <h5 class="card-title"><b>BABOOL</b></h5>
+                <p class="card-text"><u><i>(Vachellia nilotica)</i></u></p>
+                <a href="babool.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  
+  
+        <div class="carousel-item">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/bhring.avif')">
+                  <h5 class="card-title"><b>BHRINGRAJ</b></h5>
+                  <p class="card-text"><u><i>(Eclipta prostrata)</i></u></p>
+                  <a href="bhringraj.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cinn.jpg')" >
+                <h5 class="card-title"><b>CINNAMON</b></h5>
+                <p class="card-text"><u><i>(Cinnamomum verum)</i></u></p>
+                <a href="cinnamon.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/clove.jpg')" >
+                <h5 class="card-title"><b>CLOVE</b></h5>
+                <p class="card-text"><u><i>(Syzygium aromaticum)</i></u></p>
+                <a href="clove.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem;border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cumin.avif')">
+                <h5 class="card-title"><b>CUMIN</b></h5>
+                <p class="card-text"><u><i>(Cuminum cyminum)</i></u></p>
+                <a href="cumin.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="carousel-item">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/cur.avif')">
+                  <h5 class="card-title"><b>CURRY LEAVES</b></h5>
+                  <p class="card-text"><u><i>(Murraya koenigii)</i></u></p>
+                  <a href="curry.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+         </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem;border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/euca.avif')">
+                <h5 class="card-title"><b>EUCALYPTUS</b></h5>
+                <p class="card-text"><u><i>(Eucalyptus tereticornis.)</i></u></p>
+                <a href="eucalyptus.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>  
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/ginger.avif')">
+                <h5 class="card-title"><b>GINGER</b></h5>
+                <p class="card-text"><u><i>(Zingiber officinale)</i></u></p>
+                <a href="ginger.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem;border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/lav.avif')">
+                <h5 class="card-title"><b>LAVENDER</b></h5>
+                <p class="card-text"><u><i>(Lavandula angustifolia. )</i></u></p>
+                <a href="lavender.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="carousel-item">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/mehndi.png')">
+                  <h5 class="card-title"><b>MEHNDI</b></h5>
+                  <p class="card-text"><u><i>(Lawsonia inermis)</i></u></p>
+                  <a href="mehndi.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+         </div> 
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem; border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/neem2.png')" >
+                <h5 class="card-title"><b>NEEM</b></h5>
+                <p class="card-text"><u><i>(Azadirachta indica)</i></u></p>
+                <a href="neem.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem;border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/pm2.avif')">
+                <h5 class="card-title"><b>PEPPERMINT</b></h5>
+                <p class="card-text"><u><i>(Mentha piperita)</i></u></p>
+                <a href="peppermint.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem;border-color:#000000">
+              <div class="card-body" style="background-image:url('{{ STATIC_URL }}/static/images/tulsi.jpeg')">
+                <h5 class="card-title" ><b>TULSI</b></h5>
+                <p class="card-text"  ><u><i>(Ocimum tenuiflorum)</i></u></p>
+                <a href="tulsi.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000"  >Run</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="carousel-item">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 15rem;border-color:#000000">
+              <div class="card-body" style="background: rgb(244, 253, 0);
+              ">
+                  <h5 class="card-title"><b>TURMERIC</b></h5>
+                  <p class="card-text"><u><i>(Curcuma longa)</i></u></p>
+                  <a href="turmeric.html" class="btn btn-primary" style="background-color:#1c6506; border-color:#000000">Run</a>
+              </div>
+            </div>
+         </div>
+      </div>
+  </div> 
+  
+      <!-- left and right controls for the slide 
+>>>>>>> b0548c3294d8b00c66890a6c51f462e421424374
       <a class="carousel-control-prev" href="#demo" data-slide="prev" >
           <span class="carousel-control-prev-icon"></span>
       </a>
       <a class="carousel-control-next" href="#demo" data-slide="next" >
           <span class="carousel-control-next-icon"></span>
       </a>-->
+<<<<<<< HEAD
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -314,3 +986,81 @@ Cumin, scientifically known as Cuminum cyminum, is a spice commonly used in vari
 <script crossorigin="anonymous" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script crossorigin="anonymous" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 {% endblock %}
+=======
+  
+  
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+      <br> <br><br><br>
+
+      <div class="bx quote">
+        <marquee class="blink"><p style="font-size: 50px;font-weight: 500;color:#012d0e;" ><u> Cumin <i>(Cuminum cyminum)</i></u></p></marquee>
+
+        <p style="font-size: 25px; text-align: justify">
+Cumin, scientifically known as Cuminum cyminum, is a spice commonly used in various cuisines around the world. It adds a distinctive flavor and aroma to dishes. While cumin is primarily used as a culinary spice, it also possesses some potential health benefits. It has traditionally been used as a digestive aid. 
+<br><br>It contains compounds that may help stimulate the production of digestive enzymes, promote bile secretion, and aid in digestion. 
+<br><br>Cumin is often used in dishes to enhance digestion and alleviate digestive discomfort. It contains antioxidants and anti-inflammatory compounds that may help reduce inflammation in the body.It may have hypoglycemic effects and could help regulate blood sugar levels. 
+</p>
+
+<br><br>
+<h2 style="font-size: 28px;color:#1c6506;"><b><u>Nutritional Value of Cumin :</b></u> </h2><br>
+          <ul style="font-size: 25px; text-align: justify">The nutrients found are:<br>
+            <br><li><b>Calories:</b>8</li>
+            <br><li><b>Carbohydrates:</b>0.6 grams</li>
+            <br><li><b>Protein:</b>0.4 grams </li>
+            <br><li><b>Fiber:</b>0.2 grams </li>
+            <br><li><b>Magnesium:</b> 7 milligrams </li>
+            <br><li><b>Phosphorus:</b>4 milligrams</li>
+            <br><li><b>Sodium:</b>1 milligram </li>
+            <br><li><b>Potassium:</b>19 milligrams </li>
+          </ul>
+
+          <br><br>
+          <h2 style="font-size: 28px;color:#1c6506;"><b><u>Properties of Cumin :</b></u> </h2><br>
+          <ul style="font-size: 25px; text-align: justify">
+            <li><b>Flavorful and Aromatic:</b>Cumin has a warm, earthy, and slightly spicy flavor with a distinctive aroma. It is widely used in various cuisines around the world to enhance the taste and aroma of dishes. </li>
+            <br><li><b>Digestive Aid:</b>Cumin has traditionally been used as a digestive aid. It contains compounds that can help stimulate the production of digestive enzymes, promote bile secretion, and aid in digestion. </li>
+            <br><li><b>Anti-Inflammatory Properties:</b>Cumin contains antioxidants and anti-inflammatory compounds that may help reduce inflammation in the body. These properties are attributed to certain bioactive components, such as cuminaldehyde and thymoquinone. </li>
+            <br><li><b>Anti-Oxidant Effects:</b>Cumin is a good source of antioxidants, which help protect cells from damage caused by harmful free radicals. The antioxidants present in cumin, such as phenols and flavonoids, contribute to its potential health benefits.</li>
+            <br><li><b>Ulinary Versatility:</b>Cumin is a versatile spice that can be used in various forms, including whole seeds, ground powder, or as an ingredient in spice blends.</li>
+          </ul>
+
+          <br><br>
+          <h2 style="font-size: 28px;color:#1c6506;"><b><u>Side Effects of Cumin :</b></u> </h2><br>
+          <ul style="font-size: 25px; text-align: justify">
+              <li><b>Allergic Reactions:</b>Some individuals may be allergic to cumin or other spices in the same family, such as coriander or fennel. </li>
+              <br><li><b>Gastrointestinal Discomfort:</b>In rare cases, some individuals may experience gastrointestinal discomfort after consuming cumin. </li>
+              <br><li><b>Blood Clotting Effects:</b>Cumin contains compounds that may have mild antiplatelet activity, which can affect blood clotting.  </li>
+          </ul>
+
+          <br><br>
+          <h2 style="font-size: 28px;color:#1c6506;"><b><u>Interactions with other Drugs :</b></u> </h2><br>
+          <ul style="font-size: 25px; text-align: justify">It is essential to take precautions when using Cumin with:<br>
+            <br><li>Being a culinary spice, cumin is typically consumed in small amounts, and significant drug interactions are unlikely. </li>
+          </ul>
+
+          <br>
+          <img style="width: 700px; height:400px; display: block; margin-left: auto; margin-right: auto;" src="{% static 'images/cumin2.png' %}" >
+        </div>
+        </div>
+    
+      </div>
+    
+  <footer>
+    <div>
+      <span>Copyright © Jaypee Institute Of Information Technology, UP and  Gujarat Biotechnology University, Gujarat</span>
+      <span class="link">
+          <a href="#">Top</a>
+          <a href="home.html">Home</a>
+          
+      </span>
+    </div>
+  </footer>
+</body>
+</html>
+            
+>>>>>>> b0548c3294d8b00c66890a6c51f462e421424374

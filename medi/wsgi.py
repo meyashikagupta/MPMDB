@@ -15,4 +15,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'medi.settings')
 
 application = get_wsgi_application()
 
+<<<<<<< HEAD
 app = application
+=======
+app = application
+>>>>>>> b0548c3294d8b00c66890a6c51f462e421424374
