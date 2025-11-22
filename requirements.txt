@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 asgiref==3.8.1
 asttokens==2.4.1
 beautifulsoup4==4.12.3
