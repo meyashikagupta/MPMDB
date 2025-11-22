@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db.models import Q
 from django.views.generic import ListView
 
@@ -32,17 +31,3 @@ class proteom_view(ListView):
         )
         context["result_count"] = context["object_list"].count()
         return context
-=======
-from django.views.generic import ListView
-from django.shortcuts import render
-from django.db.models import Q
-from .models import med_proteom
-
-class proteom_view(ListView):
-    template_name= "proteome.html"
-
-    def get_queryset(self):
-        query = self.request.GET.get("q", default=".")
-        object_list = med_proteom.objects.filter(Q(Plant_Name=query))
-        return object_list
->>>>>>> b0548c3294d8b00c66890a6c51f462e421424374
